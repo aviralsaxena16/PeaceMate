@@ -1,10 +1,32 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { Star, Calendar, TrendingUp, Zap, Heart, Award, ArrowRight, Sparkles } from 'lucide-react'
-
+import { useRouter, useSearchParams } from 'next/navigation';
+import { SignIn, SignUp } from '@clerk/nextjs';
+import { SignedIn ,SignedOut} from '@clerk/nextjs';
 const PeaceMateLanding = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState('sign-in');
+  const router=useRouter()
+
+const Redirect = () => {
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/Home');
+  }, [router]);
+  return null;
+};
+
+  const handleOpen = (type) => {
+    setMode(type);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setIsVisible(true)
@@ -22,7 +44,7 @@ const PeaceMateLanding = () => {
     { icon: <TrendingUp className="w-8 h-8" />, title: "Weekly Insights", desc: "See your productivity trends", color: "from-pink-400 to-red-500" }
   ]
 
-  // Static particles to avoid hydration mismatch
+  
   const staticParticles = [
     { left: '10%', top: '20%', delay: '0s' },
     { left: '20%', top: '60%', delay: '1s' },
@@ -35,6 +57,8 @@ const PeaceMateLanding = () => {
   ]
 
   return (
+    <>
+    <SignedOut>
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50 relative overflow-hidden">
       {/* Static Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -76,7 +100,7 @@ const PeaceMateLanding = () => {
             PeaceMate
           </span>
         </div>
-        <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full font-semibold hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-red-500 hover:to-orange-500">
+        <button onClick={() => handleOpen('sign-in')} className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full font-semibold hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-red-500 hover:to-orange-500">
           Get Started
         </button>
       </nav>
@@ -108,15 +132,15 @@ const PeaceMateLanding = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <button className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 hover:from-red-500 hover:to-orange-500 flex items-center justify-center">
-                Start Your Journey
+              <button onClick={() => handleOpen('sign-in')} className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 hover:from-red-500 hover:to-orange-500 flex items-center justify-center">
+                Login
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-4 border-2 border-orange-300 text-orange-700 rounded-2xl font-bold text-lg hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 hover:border-orange-500">
-                Watch Demo
+              <button onClick={() => handleOpen('sign-up')} className="px-8 py-4 border-2 border-orange-300 text-orange-700 rounded-2xl font-bold text-lg hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 hover:border-orange-500">
+                Register
               </button>
             </div>
-            
+
             <div className="flex items-center space-x-6 text-sm text-gray-600">
               <div className="flex items-center">
                 <div className="flex -space-x-2">
@@ -157,7 +181,7 @@ const PeaceMateLanding = () => {
                               e.target.style.display = 'none';
                               e.target.nextSibling.style.display = 'flex';
                             }}
-                          />
+                            />
                           <div className="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 rounded-full items-center justify-center text-8xl hidden">
                             🐕
                           </div>
@@ -213,7 +237,7 @@ const PeaceMateLanding = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div
-                key={index}
+              key={index}
                 className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-500 hover:-translate-y-2"
               >
                 <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-4 text-white group-hover:rotate-12 transition-transform duration-300`}>
@@ -245,6 +269,19 @@ const PeaceMateLanding = () => {
         </div>
       </section>
 
+      {open && (
+              <div className="custom-modal-overlay">
+                <div className="custom-modal">
+                  <button className="custom-close" onClick={handleClose}>×</button>
+                  {mode === 'sign-in' ? (
+        <SignIn routing="hash" />
+      ) : (
+        <SignUp routing="hash" />
+      )}
+                </div>
+              </div>
+            )}
+      
       <style jsx>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -254,17 +291,68 @@ const PeaceMateLanding = () => {
         @keyframes float-delayed {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-8px); }
+          }
+          
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
+            }
+            
+            .animate-float-delayed {
+              animation: float-delayed 3s ease-in-out infinite 1.5s;
         }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
+          .custom-modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 999;
         }
-        
-        .animate-float-delayed {
-          animation: float-delayed 3s ease-in-out infinite 1.5s;
+
+        .custom-modal {
+          background: white;
+          padding: 2rem;
+          border-radius: 8px;
+          position: relative;
+          width: 90%;
+          max-width: 450px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-close {
+          position: absolute;
+          top: 0.5rem;
+          right: 1rem;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+        }
+
+        button {
+          margin: 0.5rem;
+          padding: 0.5rem 1rem;
+          background-color: #4f46e5;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background-color: #4338ca;
         }
       `}</style>
     </div>
+    </SignedOut>
+   <SignedIn>
+    <Redirect/>
+   </SignedIn> 
+   </>
   )
 }
 
