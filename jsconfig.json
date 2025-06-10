@@ -3,5 +3,8 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": [
+    "src/app/Signup/[[...sign-in]]/page.js"
+  ]
 }
