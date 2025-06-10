@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(uuid())
+  name        String
+  email       String       @unique
+  reflections Reflection[]
+  createdAt   DateTime     @default(now())
+}
+
+model Reflection {
+  id        String     @id @default(uuid())
+  content   String
+  date      DateTime   @default(now())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  feedback  Feedback?
+}
+
+model Feedback {
+  id             String     @id @default(uuid())
+  reflectionId   String     @unique
+  summary        String
+  productivity   Int
+  advice         String
+
+  reflection     Reflection @relation(fields: [reflectionId], references: [id])
+}
