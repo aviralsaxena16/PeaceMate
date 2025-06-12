@@ -1,4 +1,4 @@
-import { getDailyFeedback } from '@/lib/gemini';
+import { getDailyFeedback } from '@/lib/openai';
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
@@ -9,15 +9,18 @@ export async function POST(req) {
     const aiFeedback = await getDailyFeedback(content);
 
     const savedEntry = await prisma.entry.create({
-      data: {
-        userId,
-        content,
-        date: new Date(date),
-        score: aiFeedback.score,
-        summary: aiFeedback.summary,
-        feedback: aiFeedback.feedback,
-      },
-    });
+  data: {
+    content,
+    date: new Date(),
+    score: aiFeedback.score,
+    summary: aiFeedback.summary,
+    feedback: aiFeedback.feedback,
+    user: {
+      connect: { id: userId }, // ✅ This sets userId internally via relation
+    },
+  },
+});
+
 
     return NextResponse.json(savedEntry);
   } catch (error) {

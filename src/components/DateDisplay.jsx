@@ -1,9 +1,19 @@
-import React from 'react'
+"use client";
+import { useEffect, useState } from "react";
 
-const DateDisplay = () => {
-  return (
-    <div>DateDisplay</div>
-  )
+export default function DateDisplay() {
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date();
+    const formatted = today.toLocaleDateString('en-IN', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+    setDate(formatted);
+  }, []);
+
+  return <div>{date}</div>;
 }
-
-export default DateDisplay

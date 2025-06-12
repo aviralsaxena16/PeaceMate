@@ -1,13 +1,19 @@
 'use client';
 
 import { useUser } from '@clerk/nextjs';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CalendarDisplay from '@/components/CalendarDisplay';
 import Chat from '@/components/Chat';
 import DateDisplay from '@/components/DateDisplay';
 
 export default function HomePage() {
   const { user } = useUser();
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  // This function will be called when user selects a date from calendar
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate);
+  };
 
   useEffect(() => {
     if (user && user.primaryEmailAddress) {
@@ -27,12 +33,18 @@ export default function HomePage() {
     }
   }, [user]);
 
-  return( 
-<>
+  return (
+    <div className="flex w-full h-screen">
+      {/* Left Chat Section */}
+      <div className="w-2/3 p-4">
+        <Chat selectedDate={selectedDate} />
+      </div>
 
-<Chat/>
-<CalendarDisplay/>
-<DateDisplay/>
-</>
+      {/* Right Calendar + Date Display */}
+      <div className="w-1/3 p-4 border-l bg-gray-50">
+        <CalendarDisplay onChange={handleDateChange} value={selectedDate} />
+        <DateDisplay value={selectedDate} />
+      </div>
+    </div>
   );
 }

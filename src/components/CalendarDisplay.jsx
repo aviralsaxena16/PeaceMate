@@ -1,9 +1,15 @@
-import React from 'react'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-const CalendarDisplay = () => {
+export default function CalendarDisplay({ value, onChange }) {
   return (
-    <div>Display</div>
-  )
+    <div className="p-4 bg-white rounded-lg shadow">
+      <h2 className="text-lg font-semibold mb-2">Select a date</h2>
+      <Calendar
+        onChange={onChange}   
+        value={value}  
+         locale="en-US"      
+      />
+    </div>
+  );
 }
-
-export default CalendarDisplay
