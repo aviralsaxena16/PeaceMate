@@ -2,6 +2,9 @@
 
 import { useUser } from '@clerk/nextjs';
 import { useEffect } from 'react';
+import CalendarDisplay from '@/components/CalendarDisplay';
+import Chat from '@/components/Chat';
+import DateDisplay from '@/components/DateDisplay';
 
 export default function HomePage() {
   const { user } = useUser();
@@ -24,5 +27,12 @@ export default function HomePage() {
     }
   }, [user]);
 
-  return <div className="p-6">Welcome, {user?.fullName} 👋</div>;
+  return( 
+<>
+
+<Chat/>
+<CalendarDisplay/>
+<DateDisplay/>
+</>
+  );
 }
