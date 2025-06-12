@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
+import { Bold } from 'lucide-react';
 
 export default function ChatSection({ selectedDate }) {
   const [message, setMessage] = useState('');
@@ -61,7 +62,8 @@ const formattedDate = formatToYYYYMMDD(selectedDate || new Date());
             </div>
 
             <div className="bg-blue-100 border border-blue-300 p-4 rounded-xl self-end max-w-[80%] shadow">
-              <p className="text-sm text-blue-900">{entry.feedback}</p>
+              <p className="text-sm text-blue-900">Summary:{entry.summary}</p>
+              <p className="text-sm text-blue-900">Feedback: {entry.feedback}</p>
             </div>
           </>
         ) : (

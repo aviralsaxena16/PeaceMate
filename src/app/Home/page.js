@@ -36,14 +36,14 @@ export default function HomePage() {
   return (
     <div className="flex w-full h-screen">
       {/* Left Chat Section */}
-      <div className="w-2/3 p-4">
+      <div className="w-1/2 p-4">
         <Chat selectedDate={selectedDate} />
       </div>
+        <DateDisplay  />
 
       {/* Right Calendar + Date Display */}
-      <div className="w-1/3 p-4 border-l bg-gray-50">
-        <CalendarDisplay onChange={handleDateChange} value={selectedDate} />
-        <DateDisplay value={selectedDate} />
+      <div className="w-1/2 p-4 border-l bg-gray-50">
+        <CalendarDisplay handleDateChange={handleDateChange} selectedDate={selectedDate} />
       </div>
     </div>
   );
