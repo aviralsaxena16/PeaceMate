@@ -17,7 +17,6 @@ export default function DateDisplay() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Date Display Card */}
       <div 
         className="h-40 w-full max-w-xl p-6 rounded-2xl shadow-xl relative overflow-hidden mb-40 mt-5"
         style={{ background: 'linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%)' }}
@@ -42,7 +41,7 @@ export default function DateDisplay() {
             </div>
           </div>
 
-          {/* Muku icon bubble */}
+         
           <div className="relative ml-4">
             <div 
               className="w-16 h-16 rounded-full overflow-hidden border-3 border-white shadow-lg relative"
@@ -68,12 +67,12 @@ export default function DateDisplay() {
         />
       </div>
 
-      {/* New Muku Full Image Section */}
+     
     <img 
-        src="/muku1.png"  // 🟡 Replace with your actual path
+        src="/muku1.png"  
         alt="Muku Sticker"
         className="relative -bottom-8 -right-4 w-100 h-100 object-contain select-none pointer-events-none"
-        style={{ transform: 'rotate(-6deg)' }} // Optional: sticker feel
+        style={{ transform: 'rotate(-6deg)' }} 
       />
     </div>
   );
