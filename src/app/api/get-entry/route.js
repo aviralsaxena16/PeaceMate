@@ -1,23 +1,30 @@
 import { prisma } from '@/lib/prisma';
+import { DateTime } from 'luxon';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
-  const dateParam = searchParams.get('date'); // e.g., "2025-06-12"
+  const dateParam = searchParams.get('date'); // "2025-06-13"
+  const userId = searchParams.get('userId');
 
-  if (!dateParam) {
-    return new Response('Date is required', { status: 400 });
+  if (!dateParam || !userId) {
+    return new Response('Date and userId are required', { status: 400 });
   }
 
   try {
-    // Ensure the date is treated as local day start (optional: use UTC if your DB stores in UTC)
-    const startOfDay = new Date(dateParam + 'T00:00:00.000Z');
-    const endOfDay = new Date(dateParam + 'T23:59:59.999Z');
+    // Interpret the date in IST timezone
+    const istStart = DateTime.fromISO(dateParam, { zone: 'Asia/Kolkata' }).startOf('day');
+    const istEnd = istStart.endOf('day');
+
+    // Convert to UTC for DB comparison
+    const startUTC = istStart.toUTC().toJSDate();
+    const endUTC = istEnd.toUTC().toJSDate();
 
     const entry = await prisma.entry.findFirst({
       where: {
+        userId,
         date: {
-          gte: startOfDay,
-          lte: endOfDay,
+          gte: startUTC,
+          lte: endUTC,
         },
       },
       orderBy: {

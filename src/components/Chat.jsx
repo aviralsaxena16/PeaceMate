@@ -33,15 +33,18 @@ export default function ChatSection({ selectedDate }) {
     setEntry(saved);
     setMessage('');
   };
+useEffect(() => {
+  const fetchEntry = async () => {
+    if (!user) return;
 
-  useEffect(() => {
-    const fetchEntry = async () => {
-      const res = await fetch(`/api/get-entry?date=${formattedDate}`);
-      const data = await res.json();
-      setEntry(data || null);
-    };
-    fetchEntry();
-  }, [formattedDate]);
+    const res = await fetch(`/api/get-entry?date=${formattedDate}&userId=${user.id}`);
+    const data = await res.json();
+    setEntry(data || null);
+  };
+
+  fetchEntry();
+}, [formattedDate, user]);
+
 
   return (
     <div className="chat-container">

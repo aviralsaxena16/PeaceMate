@@ -1,6 +1,7 @@
 import { getDailyFeedback } from '@/lib/openai';
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { DateTime } from 'luxon';
 
 export async function POST(req) {
   try {
@@ -8,19 +9,22 @@ export async function POST(req) {
 
     const aiFeedback = await getDailyFeedback(content);
 
-    const savedEntry = await prisma.entry.create({
-  data: {
-    content,
-    date: new Date(),
-    score: aiFeedback.score,
-    summary: aiFeedback.summary,
-    feedback: aiFeedback.feedback,
-    user: {
-      connect: { id: userId }, // ✅ This sets userId internally via relation
-    },
-  },
-});
+    // Ensure the date is treated in IST and saved in UTC for consistent querying
+    const istDate = DateTime.fromISO(date, { zone: 'Asia/Kolkata' }).startOf('day');
+    const dateToStore = istDate.toUTC().toJSDate();
 
+    const savedEntry = await prisma.entry.create({
+      data: {
+        content,
+        date: dateToStore, // ✅ aligned with IST day start
+        score: aiFeedback.score,
+        summary: aiFeedback.summary,
+        feedback: aiFeedback.feedback,
+        user: {
+          connect: { id: userId },
+        },
+      },
+    });
 
     return NextResponse.json(savedEntry);
   } catch (error) {

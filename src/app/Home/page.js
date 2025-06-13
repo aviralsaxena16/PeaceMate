@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import CalendarDisplay from '@/components/CalendarDisplay';
 import Chat from '@/components/Chat';
 import DateDisplay from '@/components/DateDisplay';
+import Navbar from '@/components/Navbar';
 
 export default function HomePage() {
   const { user } = useUser();
@@ -34,17 +35,28 @@ export default function HomePage() {
   }, [user]);
 
   return (
-    <div  style={{ backgroundImage: `url(https://wallpaperaccess.com/full/4308123.jpg)` }} className="flex w-full h-screen bg-cover bg-center bg-fixed">
-      {/* Left Chat Section */}
-        <DateDisplay  />
-      <div className="w-1/2 p-4 ">
-        <CalendarDisplay handleDateChange={handleDateChange} selectedDate={selectedDate} />
+    <>
+      {/* Fixed Navbar */}
+      <Navbar />
+      
+      {/* Main Content */}
+      <div 
+        style={{ backgroundImage: `url(https://wallpaperaccess.com/full/4308123.jpg)` }} 
+        className="flex w-full h-screen bg-cover bg-center bg-fixed homepage-container"
+      >
+        {/* Left Section - Date Display */}
+        <DateDisplay />
+        
+        {/* Middle Section - Calendar */}
+        <div className="w-1/2 p-4">
+          <CalendarDisplay handleDateChange={handleDateChange} selectedDate={selectedDate} />
+        </div>
+        
+        {/* Right Section - Chat */}
+        <div className="w-1/2 p-4">
+          <Chat selectedDate={selectedDate} />
+        </div>
       </div>
-      <div className="w-1/2 p-4">
-        <Chat selectedDate={selectedDate} />
-      </div>
-
-      {/* Right Calendar + Date Display */}
-    </div>
+    </>
   );
 }
