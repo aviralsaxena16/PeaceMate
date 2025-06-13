@@ -34,7 +34,7 @@ export default function HomePage() {
   }, [user]);
 
   return (
-    <div className="flex w-full h-screen " style={{ backgroundImage: `url(https://wallpaperaccess.com/full/4308123.jpg)` }}>
+    <div  style={{ backgroundImage: `url(https://wallpaperaccess.com/full/4308123.jpg)` }} className="flex w-full h-screen bg-cover bg-center bg-fixed">
       {/* Left Chat Section */}
         <DateDisplay  />
       <div className="w-1/2 p-4 ">
