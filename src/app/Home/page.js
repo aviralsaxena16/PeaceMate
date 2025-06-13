@@ -34,17 +34,17 @@ export default function HomePage() {
   }, [user]);
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full h-screen " style={{ backgroundImage: `url(https://wallpaperaccess.com/full/4308123.jpg)` }}>
       {/* Left Chat Section */}
+        <DateDisplay  />
+      <div className="w-1/2 p-4 ">
+        <CalendarDisplay handleDateChange={handleDateChange} selectedDate={selectedDate} />
+      </div>
       <div className="w-1/2 p-4">
         <Chat selectedDate={selectedDate} />
       </div>
-        <DateDisplay  />
 
       {/* Right Calendar + Date Display */}
-      <div className="w-1/2 p-4 border-l bg-gray-50">
-        <CalendarDisplay handleDateChange={handleDateChange} selectedDate={selectedDate} />
-      </div>
     </div>
   );
 }
