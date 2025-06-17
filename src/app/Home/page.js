@@ -22,35 +22,60 @@ export default function HomePage() {
   useEffect(() => {
     if (user && user.primaryEmailAddress) {
       const registerUser = async () => {
-        await fetch('/api/register-user', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: user.id,
-            name: user.fullName,
-            email: user.primaryEmailAddress.emailAddress,
-          }),
-        });
+        try {
+          await fetch('/api/register-user', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: user.id,
+              name: user.fullName,
+              email: user.primaryEmailAddress.emailAddress,
+            }),
+          });
+        } catch (err) {
+          // Optionally handle registration errors here
+          console.error('User registration failed:', err);
+        }
       };
 
       registerUser();
     }
   }, [user]);
 
-  // Admin check with pathname condition
+  // Admin check with pathname condition, with robust JSON handling
   useEffect(() => {
     const checkAdmin = async () => {
-      const res = await fetch(`/api/check-admin?userId=${user?.id}`);
-      const data = await res.json();
-      if (data.isAdmin && pathname !== '/admin') {
-        router.replace('/admin');
-      } else {
+      try {
+        const res = await fetch(`/api/check-admin?userId=${user?.id}`);
+        if (!res.ok) {
+          setIsAdminChecked(true);
+          return;
+        }
+        const text = await res.text();
+        if (!text) {
+          setIsAdminChecked(true);
+          return;
+        }
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          setIsAdminChecked(true);
+          return;
+        }
+        if (data.isAdmin && pathname !== '/admin') {
+          router.replace('/admin');
+        } else {
+          setIsAdminChecked(true);
+        }
+      } catch (err) {
+        // Optionally handle fetch errors here
         setIsAdminChecked(true);
       }
     };
 
     if (user) checkAdmin();
-  }, [user, pathname,router]);
+  }, [user, pathname, router]);
 
   if (!isLoaded || (user && !isAdminChecked)) {
     return null;
