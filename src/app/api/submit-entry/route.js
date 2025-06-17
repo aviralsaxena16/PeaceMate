@@ -1,3 +1,4 @@
+// /api/submit-entry
 import { getDailyFeedback } from '@/lib/openai';
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
@@ -7,16 +8,16 @@ export async function POST(req) {
   try {
     const { userId, content, date } = await req.json();
 
-    const aiFeedback = await getDailyFeedback(content);
-
-    // Ensure the date is treated in IST and saved in UTC for consistent querying
+    // Convert date string to IST start of day, then to UTC
     const istDate = DateTime.fromISO(date, { zone: 'Asia/Kolkata' }).startOf('day');
-    const dateToStore = istDate.toUTC().toJSDate();
+    const utcDate = istDate.toUTC();
+
+    const aiFeedback = await getDailyFeedback(content);
 
     const savedEntry = await prisma.entry.create({
       data: {
         content,
-        date: dateToStore, // ✅ aligned with IST day start
+        date: utcDate.toJSDate(),
         score: aiFeedback.score,
         summary: aiFeedback.summary,
         feedback: aiFeedback.feedback,
@@ -26,9 +27,12 @@ export async function POST(req) {
       },
     });
 
-    return NextResponse.json(savedEntry);
+    return NextResponse.json({
+      ...savedEntry,
+      date: istDate.toISO(), // Return IST date for frontend
+    });
   } catch (error) {
     console.error('Submit Entry Error:', error);
-    return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to save entry' }, { status: 500 });
   }
 }

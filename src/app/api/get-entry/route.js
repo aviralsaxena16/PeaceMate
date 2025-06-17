@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
-  const dateParam = searchParams.get('date'); // "2025-06-13"
+  const dateParam = searchParams.get('date');
   const userId = searchParams.get('userId');
 
   if (!dateParam || !userId) {
@@ -11,20 +11,20 @@ export async function GET(req) {
   }
 
   try {
-    // Interpret the date in IST timezone
+    // IST start of day, and start of next day
     const istStart = DateTime.fromISO(dateParam, { zone: 'Asia/Kolkata' }).startOf('day');
-    const istEnd = istStart.endOf('day');
+    const istNextDay = istStart.plus({ days: 1 });
 
-    // Convert to UTC for DB comparison
+    // Convert to UTC for DB range query (half-open interval)
     const startUTC = istStart.toUTC().toJSDate();
-    const endUTC = istEnd.toUTC().toJSDate();
+    const endUTC = istNextDay.toUTC().toJSDate();
 
     const entry = await prisma.entry.findFirst({
       where: {
         userId,
         date: {
           gte: startUTC,
-          lte: endUTC,
+          lt: endUTC,
         },
       },
       orderBy: {
