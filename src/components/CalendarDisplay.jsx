@@ -142,7 +142,7 @@ const CalendarDisplay = ({ handleDateChange, selectedDate }) => {
                 <div key={i} className={`w-6 h-6 rounded-full bg-gradient-to-r ${gradient}`} />
               ))}
             </div>
-            <span className="text-xs font-medium">Join 10,000+ happy users</span>
+            <span className="text-xs font-medium">Join us for your self-growth</span>
           </div>
         </footer>
       </div>

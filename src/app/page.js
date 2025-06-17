@@ -100,7 +100,7 @@ const Redirect = () => {
             <Heart className="w-6 h-6 text-white" />
           </div>
           <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-            PeaceMate
+            PeaceMate- Made by Aviral Saxena
           </span>
         </div>
         <button onClick={() => handleOpen('sign-in')} className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full font-semibold hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-red-500 hover:to-orange-500">
@@ -152,7 +152,7 @@ const Redirect = () => {
                   <div className="w-8 h-8 bg-gradient-to-r from-pink-400 to-orange-500 rounded-full border-2 border-white"></div>
                   <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full border-2 border-white"></div>
                 </div>
-                <span className="ml-3">Join 10,000+ happy users</span>
+                <span className="ml-3">Join us for your self-growth</span>
               </div>
             </div>
           </div>
@@ -259,15 +259,15 @@ const Redirect = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Find Peace Through Reflection?
+              Get Ready to Find Peace Through Reflection
             </h2>
             <p className="text-xl text-orange-100 mb-8">
-              Join thousands of users who are already finding daily insights with PeaceMate
+             Made By Aviral saxena
             </p>
-            <button className="group px-12 py-4 bg-white text-orange-600 rounded-2xl font-bold text-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 hover:bg-orange-50 flex items-center justify-center mx-auto">
+            {/* <button className="group px-12 py-4 bg-white text-orange-600 rounded-2xl font-bold text-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 hover:bg-orange-50 flex items-center justify-center mx-auto">
               Get Started for Free
               <Zap className="ml-2 w-6 h-6 group-hover:text-yellow-500 transition-colors" />
-            </button>
+            </button> */}
           </div>
         </div>
       </section>
