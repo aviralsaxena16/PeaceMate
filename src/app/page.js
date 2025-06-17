@@ -4,6 +4,9 @@ import { Star, Calendar, TrendingUp, Zap, Heart, Award, ArrowRight, Sparkles } f
 import { useRouter, useSearchParams } from 'next/navigation';
 import { SignIn, SignUp } from '@clerk/nextjs';
 import { SignedIn ,SignedOut} from '@clerk/nextjs';
+import Image from 'next/image';
+
+
 const PeaceMateLanding = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
@@ -173,7 +176,7 @@ const Redirect = () => {
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 p-1">
                       <div className="w-full h-full rounded-full bg-white p-2">
                         <div className="w-full h-full rounded-full overflow-hidden shadow-lg">
-                          <img 
+                          <Image width={500} height={300}
                             src="/dog.jpg" 
                             alt="Muku" 
                             className="w-full h-full object-cover"
@@ -207,13 +210,13 @@ const Redirect = () => {
                 {/* Floating Chat Bubbles */}
                 <div className="absolute -left-8 top-1/3 transform -translate-y-1/2 animate-float">
                   <div className="bg-gradient-to-r from-pink-400 to-red-500 text-white px-4 py-2 rounded-2xl rounded-bl-sm text-sm font-semibold shadow-lg">
-                    "How was your day?"
+                    How was your day?
                   </div>
                 </div>
                 
                 <div className="absolute -right-8 bottom-1/3 animate-float-delayed">
                   <div className="bg-gradient-to-r from-orange-400 to-yellow-500 text-white px-4 py-2 rounded-2xl rounded-br-sm text-sm font-semibold shadow-lg">
-                    "Great progress! 🌟"
+                    Great progress! 🌟
                   </div>
                 </div>
               </div>

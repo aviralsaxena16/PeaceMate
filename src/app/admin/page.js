@@ -10,18 +10,18 @@ export default function AdminDashboard() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const router = useRouter();
 
-  const fetchUsers = async () => {
-    try {
-      const res = await fetch(`/api/get-users?userId=${user?.id}`);
-      const data = await res.json();
-      console.log('AdminPage: data =', data)
-      setUsers(data);
-    } catch (err) {
-      console.error('Failed to fetch users:', err);
-    }
-  };
-
- useEffect(() => {
+  
+  useEffect(() => {
+   const fetchUsers = async () => {
+     try {
+       const res = await fetch(`/api/get-users?userId=${user?.id}`);
+       const data = await res.json();
+       console.log('AdminPage: data =', data)
+       setUsers(data);
+     } catch (err) {
+       console.error('Failed to fetch users:', err);
+     }
+   };
   console.log('AdminPage: useEffect triggered');
   if (!isLoaded) {
     console.log('AdminPage: isLoaded = false');
@@ -41,7 +41,7 @@ export default function AdminDashboard() {
     console.log('AdminPage: User is not admin, redirecting');
     router.replace('/');
   }
-}, [isLoaded, user]);
+}, [isLoaded, user, router]);
 
   if (!isLoaded || !isAuthorized) return null;
 

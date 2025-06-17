@@ -50,7 +50,7 @@ export default function HomePage() {
     };
 
     if (user) checkAdmin();
-  }, [user, pathname]);
+  }, [user, pathname,router]);
 
   if (!isLoaded || (user && !isAdminChecked)) {
     return null;
