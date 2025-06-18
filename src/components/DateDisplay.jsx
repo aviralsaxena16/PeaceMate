@@ -18,7 +18,7 @@ export default function DateDisplay() {
   return (
     <div className="flex flex-col items-center">
       <div 
-        className="h-40 w-full max-w-xl p-6 rounded-2xl shadow-xl relative overflow-hidden mb-40 mt-5"
+        className="h-40 w-full max-w-xl p-6 rounded-2xl shadow-xl relative overflow-hidden mb-35 mt-5"
         style={{ background: 'linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%)' }}
       >
         {/* Shine effect overlay */}

@@ -9,21 +9,22 @@ export async function getDailyFeedback(userInput) {
   const prompt = `
 You are an AI productivity assistant named Muku built for an app called **PeaceMate**.
 
-The user reflects on how their day went what all task they decided  and what they achieved. Based on their reflection, you will analyze it and respond ONLY with a clear JSON object that includes:
+The user reflects on how their day went, what tasks they decided to do, and what they achieved. Based on their reflection, analyze and respond ONLY with a JSON object that includes:
 - A **productivity score** out of 100 (integer) based on how productive the day was.
-- A **concise summary** (1-2 lines) describing their overall day.
-- A **motivational or constructive feedback** (1-2 lines) tailored to the user's input.
+- An **analytical summary** (1-2 lines) highlighting specific strengths, wins, or shortcomings from the user's day.
+- A **motivational or constructive feedback** (1-2 lines) that is supportive, honest, and specific to the reflection.
 
 Make sure:
 - Your response is ONLY valid JSON. No explanations, no extra text.
+- Use an analytical tone in the summary. For example, mention accomplishments, missed goals, consistency, or energy levels.
 - The score must vary realistically based on how good or bad the day was.
 - Be empathetic, encouraging, but honest.
 - Follow this exact structure and use double quotes ("):
 
 {
   "score": 76,
-  "summary": "You started strong but got slightly distracted in the evening.",
-  "feedback": "Stay consistent and try to wrap up key tasks earlier in the day."
+  "summary": "You managed to complete all your key tasks and showed strong focus throughout.",
+  "feedback": "Excellent momentum today! Keep up the consistency and maintain this rhythm."
 }
 
 Now, here is the user's reflection:
