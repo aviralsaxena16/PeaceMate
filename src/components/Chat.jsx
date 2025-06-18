@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Bold } from 'lucide-react';
-import './Chat.css'
+import styles from './Chat.module.css'; // ✅ CSS Modules
 
 export default function ChatSection({ selectedDate }) {
   const [message, setMessage] = useState('');
@@ -11,7 +11,7 @@ export default function ChatSection({ selectedDate }) {
   const userId = user?.id;
 
   function formatToYYYYMMDD(date) {
-    return date.toISOString().split('T')[0]; // '2025-06-13'
+    return date.toISOString().split('T')[0];
   }
 
   const formattedDate = formatToYYYYMMDD(selectedDate || new Date());
@@ -33,63 +33,52 @@ export default function ChatSection({ selectedDate }) {
     setEntry(saved);
     setMessage('');
   };
-useEffect(() => {
-  const fetchEntry = async () => {
-    if (!user) return;
 
-    const res = await fetch(`/api/get-entry?date=${formattedDate}&userId=${user.id}`);
-    const data = await res.json();
-    setEntry(data || null);
-  };
+  useEffect(() => {
+    const fetchEntry = async () => {
+      if (!user) return;
 
-  fetchEntry();
-}, [formattedDate, user]);
+      const res = await fetch(`/api/get-entry?date=${formattedDate}&userId=${user.id}`);
+      const data = await res.json();
+      setEntry(data || null);
+    };
 
+    fetchEntry();
+  }, [formattedDate, user]);
 
   return (
-    <div className="chat-container">
-      {/* Chat Display */}
-      <div className="chat-display">
+    <div className={styles.chatContainer}>
+      <div className={styles.chatDisplay}>
         {entry ? (
           <>
-            {/* User Message */}
-            <div className="user-message">
-              {entry.content}
-            </div>
-            
-            {/* Response Container */}
-            <div className="response-container">
-              {/* Productivity Score Circle */}
-              <div className="score-circle">
-                <div className="score-value">{entry.score}%</div>
-                <div className="score-label">Productivity</div>
+            <div className={styles.userMessage}>{entry.content}</div>
+
+            <div className={styles.responseContainer}>
+              <div className={styles.scoreCircle}>
+                <div className={styles.scoreValue}>{entry.score}%</div>
+                <div className={styles.scoreLabel}>Productivity</div>
               </div>
-              
-              {/* Summary Message */}
-              <div className="response-message">
-                <div className="message-heading">Summary</div>
-                <div className="message-content">{entry.summary}</div>
+
+              <div className={styles.responseMessage}>
+                <div className={styles.messageHeading}>Summary</div>
+                <div className={styles.messageContent}>{entry.summary}</div>
               </div>
-              
-              {/* Feedback Message */}
-              <div className="response-message">
-                <div className="message-heading">Feedback</div>
-                <div className="message-content">{entry.feedback}</div>
+
+              <div className={styles.responseMessage}>
+                <div className={styles.messageHeading}>Feedback</div>
+                <div className={styles.messageContent}>{entry.feedback}</div>
               </div>
             </div>
           </>
         ) : (
-          <div className="no-entry">
-            No reflection yet for this day.
-          </div>
+          <div className={styles.noEntry}>No reflection yet for this day.</div>
         )}
       </div>
 
-      {/* Input Section */}
-      <div className="input-section">
+      <div className={styles.inputSection}>
         <input
           type="text"
-          className="message-input"
+          className={styles.messageInput}
           placeholder="Type how your day went..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -97,7 +86,7 @@ useEffect(() => {
             if (e.key === 'Enter') handleSend();
           }}
         />
-        <button className="send-button" onClick={handleSend}>
+        <button className={styles.sendButton} onClick={handleSend}>
           Send
         </button>
       </div>
