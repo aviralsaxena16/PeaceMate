@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "next.config.js",
-      "use": "@vercel/next"
-    }
-  ],
   "env": {
     "DATABASE_URL": "postgresql://postgres:peacemate1947@db.usvywgpulybyxyfttlla.supabase.co:5432/postgres"
   },
-  "buildCommand": "npx prisma generate && next build"
+  "buildCommand": "npx prisma generate && next build",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 }
