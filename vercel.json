@@ -9,6 +9,5 @@
   "env": {
     "DATABASE_URL": "postgresql://postgres:peacemate1947@db.usvywgpulybyxyfttlla.supabase.co:5432/postgres"
   },
-  "buildCommand": "npx prisma generate && next build",
-  "outputDirectory": ".next"
+  "buildCommand": "npx prisma generate && next build"
 }
