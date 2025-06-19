@@ -1,7 +1,7 @@
 {
   "version": 2,
   "env": {
-    "DATABASE_URL": "postgresql://postgres:peacemate1947@db.usvywgpulybyxyfttlla.supabase.co:5432/postgres"
+    "DATABASE_URL": "postgresql://postgres.usvywgpulybyxyfttlla:peacemate1947@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
   },
   "buildCommand": "npx prisma generate && next build",
   "framework": "nextjs",
