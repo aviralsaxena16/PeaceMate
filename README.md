@@ -30,3 +30,6 @@ PeaceMate is a modern AI-driven productivity reflection tool that helps users un
 ```bash
 git clone https://github.com/aviralsaxena16/peacemate.git
 cd peacemate
+
+```
+Made by Aviral saxena
