@@ -2,6 +2,9 @@
 
 PeaceMate is a modern AI-driven productivity reflection tool that helps users understand and improve their daily habits. Basically User can enter how his day went and whether he executed his plans or not and then on the basis of the entry given our muku (AI dog ) replies and give the feedback and summary based on your day 
 
+<img src="https://github.com/aviralsaxena16/PeaceMate/blob/main/public/login.png?raw=true" width="500"/>    <img src="https://github.com/aviralsaxena16/PeaceMate/blob/main/public/home.png?raw=true" width="500"/>
+
+
 ## ✨ Features
 
 - ✅ **Google Authentication** via Clerk
