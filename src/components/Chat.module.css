@@ -1,5 +1,5 @@
 /* Main Chat Container */
-.chat-container {
+.chatContainer {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -10,7 +10,7 @@
 }
 
 /* Chat Display Area */
-.chat-display {
+.chatDisplay {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -21,21 +21,21 @@
   scrollbar-color: rgba(255, 107, 53, 0.3) transparent;
 }
 
-.chat-display::-webkit-scrollbar {
+.chatDisplay::-webkit-scrollbar {
   width: 6px;
 }
 
-.chat-display::-webkit-scrollbar-track {
+.chatDisplay::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.chat-display::-webkit-scrollbar-thumb {
+.chatDisplay::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #ff6b35, #f7931e);
   border-radius: 10px;
 }
 
 /* User Message Bubble */
-.user-message {
+.userMessage {
   align-self: flex-end;
   background: linear-gradient(135deg, #ff6b35, #f7931e);
   color: white;
@@ -51,7 +51,7 @@
 }
 
 /* Response Container */
-.response-container {
+.responseContainer {
   align-self: flex-start;
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@
 }
 
 /* Productivity Score Circle */
-.score-circle {
+.scoreCircle {
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -79,7 +79,7 @@
   margin: 10px 0;
 }
 
-.score-circle::before {
+.scoreCircle::before {
   content: '';
   position: absolute;
   inset: -3px;
@@ -90,13 +90,13 @@
   opacity: 0.7;
 }
 
-.score-value {
+.scoreValue {
   font-size: 28px;
   font-weight: 800;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.score-label {
+.scoreLabel {
   font-size: 11px;
   font-weight: 600;
   opacity: 0.9;
@@ -106,7 +106,7 @@
 }
 
 /* Response Messages */
-.response-message {
+.responseMessage {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -118,7 +118,7 @@
   overflow: hidden;
 }
 
-.response-message::before {
+.responseMessage::before {
   content: '';
   position: absolute;
   top: 0;
@@ -128,7 +128,7 @@
   background: linear-gradient(90deg, #ff6b35, #f7931e, #ffb74d);
 }
 
-.message-heading {
+.messageHeading {
   font-size: 14px;
   font-weight: 700;
   color: #ff6b35;
@@ -140,7 +140,7 @@
   gap: 8px;
 }
 
-.message-heading::before {
+.messageHeading::before {
   content: '';
   width: 6px;
   height: 6px;
@@ -148,7 +148,7 @@
   background: linear-gradient(135deg, #ff6b35, #f7931e);
 }
 
-.message-content {
+.messageContent {
   font-size: 15px;
   line-height: 1.6;
   color: #1a0f08;
@@ -156,7 +156,7 @@
 }
 
 /* No Entry State */
-.no-entry {
+.noEntry {
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
   font-size: 16px;
@@ -170,7 +170,7 @@
 }
 
 /* Input Section */
-.input-section {
+.inputSection {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -183,13 +183,13 @@
   transition: all 0.3s ease;
 }
 
-.input-section:focus-within {
+.inputSection:focus-within {
   border-color: #ff6b35;
   box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4);
   transform: translateY(-2px);
 }
 
-.message-input {
+.messageInput {
   flex: 1;
   border: none;
   outline: none;
@@ -201,12 +201,12 @@
   font-weight: 500;
 }
 
-.message-input::placeholder {
+.messageInput::placeholder {
   color: rgba(44, 24, 16, 0.5);
   font-style: italic;
 }
 
-.send-button {
+.sendButton {
   background: linear-gradient(135deg, #ff6b35, #f7931e);
   color: white;
   border: none;
@@ -221,13 +221,13 @@
   letter-spacing: 0.5px;
 }
 
-.send-button:hover {
+.sendButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
   background: linear-gradient(135deg, #f7931e, #ff6b35);
 }
 
-.send-button:active {
+.sendButton:active {
   transform: translateY(0);
 }
 
@@ -267,28 +267,28 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .chat-container {
+  .chatContainer {
     padding: 15px;
   }
   
-  .user-message, .response-container {
+  .userMessage, .responseContainer {
     max-width: 90%;
   }
   
-  .score-circle {
+  .scoreCircle {
     width: 100px;
     height: 100px;
   }
   
-  .score-value {
+  .scoreValue {
     font-size: 24px;
   }
   
-  .input-section {
+  .inputSection {
     padding: 6px 6px 6px 20px;
   }
   
-  .send-button {
+  .sendButton {
     padding: 10px 20px;
     font-size: 13px;
   }

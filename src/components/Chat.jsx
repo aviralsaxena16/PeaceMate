@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Bold } from 'lucide-react';
-import styles from './Chat.module.css'; // ✅ CSS Modules
+import styles from './Chat.module.css'; 
 
 export default function ChatSection({ selectedDate }) {
   const [message, setMessage] = useState('');
