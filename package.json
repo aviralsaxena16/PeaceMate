@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "npm rebuild @tailwindcss/oxide --update-binary && npx prisma generate && next build",
-    "postinstall": "npx prisma generate",
-    "start": "next start",
-    "lint": "next lint"
-  },
+  "dev": "next dev",
+  "build": "npx prisma generate && next build",
+  "start": "next start",
+  "lint": "next lint",
+  "postinstall": "npx prisma generate"
+}
+,
   "engines": {
     "node": ">=20"
   },
