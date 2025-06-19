@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm rebuild @tailwindcss/oxide --update-binary && npx prisma generate && next build",
     "postinstall": "npx prisma generate",
     "start": "next start",
     "lint": "next lint"
